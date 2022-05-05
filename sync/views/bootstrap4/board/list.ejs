@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board List</title>
+  <!-- CSS -->
+  <%- include(`${ejsRoot}/inc/stylesheets`); %>
+</head>
+
+<body>
+
+  <header>
+    <%- include(`${ejsRoot}/inc/board-navigation`); %>
+  </header>
+
+  <main role="main">
+
+    <%- include(`${ejsRoot}/inc/jumbotron`); %>
+
+    <div class="container">
+
+      <div class="float-right mb-3">
+        <form action="<%= baseUrl %>/board/search" method="post" class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="게시판 제목을 입력해 주세요." aria-label="Search"
+            name="title">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">검색</button>
+        </form>
+      </div>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">번호</th>
+            <th scope="col">아이디</th>
+            <th scope="col">제목</th>
+            <th scope="col">수정</th>
+            <th scope="col">조회</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i = 0; i < rows.length; i++) { %>
+
+          <% if (rows[i].uid === 'admin') { %>
+          <tr class="alert alert-dark" onclick="window.location.href='<%= baseUrl %>/board/detail/<%= rows[i].bid %>'">
+            <% } else { %>
+          <tr onclick="window.location.href='<%= baseUrl %>/board/detail/<%= rows[i].bid %>'">
+            <% } %>
+
+            <th scope="row"><%= rows[i].bid %></th>
+            <td><%= rows[i].uid %></td>
+            <td><%= rows[i].title %></td>
+            <td><%= rows[i].modTime %></td>
+            <td><%= rows[i].viewCount %></td>
+          </tr>
+
+          <% } %>
+        </tbody>
+      </table>
+
+      <div class="float-right mb-3">
+        <button class="btn btn-primary my-2 my-sm-0" type="button"
+          onclick="window.location.href='<%= baseUrl %>/board/write'">글쓰기</button>
+      </div>
+
+      <div style="clear: both;"></div>
+
+      <nav aria-label="Page navigation example">
+        <% if (pageCount > 0) { %>
+        <ul class="pagination justify-content-center">
+          <%
+          pageNum = Number(pageNum);
+          pageCount = Number(pageCount);
+          pageSize = Number(pageSize);
+          startPage = Number(startPage);
+          endPage = Number(endPage);
+          totalPage = Number(totalPage);
+          %>
+
+          <% if(startPage === pageNum && pageNum === 1) { %>
+          <li class="page-item disabled">
+            <a class="page-link" href="javascript:void(0);" tabindex="-1" aria-disabled="true">이전</a>
+          </li>
+          <% } else { %>
+          <li class="page-item">
+            <a class="page-link" href="/board/list/<%= pageNum-1 %>" tabindex="-1" aria-disabled="true">이전</a>
+          </li>
+          <% } %>
+
+          <% for(var i=startPage; i< endPage+1; i++) { %>
+          <% if(pageNum === i) { %>
+          <li class="page-item active">
+            <a class="page-link" href="/board/list/<%= i %>"><%= i %></a>
+          </li>
+          <% } else { %>
+          <li class="page-item">
+            <a class="page-link" href="/board/list/<%= i %>"><%= i %></a>
+          </li>
+          <% } %>
+          <% } %>
+
+          <% if(totalPage === pageNum) { %>
+          <li class="page-item disabled">
+            <a class="page-link" href="javascript:void(0);" tabindex="-1" aria-disabled="true">다음</a>
+          </li>
+          <% } else { %>
+          <li class="page-item">
+            <a class="page-link" href="/board/list/<%= pageNum+1 %>" tabindex="-1" aria-disabled="true">다음</a>
+          </li>
+          <% } %>
+
+        </ul>
+        <% } else { %>
+        등록된 글이 없습니다.
+        <% } %>
+      </nav>
+
+    </div>
+
+  </main><!-- /.container -->
+
+  <footer class="footer">
+    <%- include(`${ejsRoot}/inc/copyright`); %>
+  </footer>
+
+  <!-- SCRIPT -->
+  <%- include(`${ejsRoot}/inc/scripts`); %>
+</body>
+
+</html>

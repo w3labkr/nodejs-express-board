@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board List</title>
+  <!-- CSS -->
+  <%- include(`${ejsRoot}/inc/stylesheets`); %>
+
+  <% current = 'user' %>
+</head>
+
+<body>
+
+  <header>
+    <%- include(`${ejsRoot}/inc/admin-navigation`); %>
+  </header>
+
+  <main class="main" role="main">
+
+    <%- include(`${ejsRoot}/inc/jumbotron`); %>
+
+    <div class="container">
+
+      <div class="row mb-3">
+        <div class="col-12 text-center">
+          <h1>회원정보</h1>
+        </div>
+      </div>
+
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="col" width="100">아이디</th>
+            <td><%= rows.uid %></td>
+          </tr>
+          <tr>
+            <th scope="col">이름</th>
+            <td><%= rows.uname %></td>
+          </tr>
+          <tr>
+            <th scope="col">전화번호</th>
+            <td><%= rows.tel %></td>
+          </tr>
+          <tr>
+            <th scope="col">이메일</th>
+            <td><%= rows.email %></td>
+          </tr>
+          <tr>
+            <th scope="col">썸네일</th>
+            <td colspan="3">
+              <img src="<%= rows.photo %>" alt="">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="rows">
+
+        <div class="btn-group float-left" role="group">
+          <button class="btn btn-outline-secondary" type="button"
+            onclick="window.location.href='<%= baseUrl %>/admin/userlist/1'">목록</button>
+          <button class="btn btn-outline-secondary" type="button" onclick="window.history.back(-1)">이전</button>
+        </div>
+
+        <div class="btn-group float-right" role="group">
+          <button id="deletePost" class="btn btn-outline-primary" type="button" onclick="deleteAfterAlert()">삭제</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main><!-- /.container -->
+
+  <footer class="footer">
+    <%- include(`${ejsRoot}/inc/copyright`); %>
+  </footer>
+
+  <!-- SCRIPT -->
+  <%- include(`${ejsRoot}/inc/scripts`); %>
+  <script>
+    function deleteAfterAlert() {
+      const isDelete = confirm('정말 삭제 하시겠습니까?');
+      if (isDelete) {
+        window.location.href = '<%= baseUrl %>/admin/userdelete/<%= rows.bid %>'
+      }
+    }
+  </script>
+</body>
+
+</html>

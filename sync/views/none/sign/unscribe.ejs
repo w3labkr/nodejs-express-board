@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User List</title>
+  <!-- CSS -->
+  <%- include(`${ejsRoot}/inc/stylesheets`); %>
+
+</head>
+
+<body>
+
+  <header>
+    <%- include(`${ejsRoot}/inc/users-navigation`); %>
+  </header>
+
+  <main role="main">
+
+    <%- include(`${ejsRoot}/inc/jumbotron`); %>
+
+    <div class="container">
+      <form action="<%= baseUrl %>/unscribe/<%= session.uid %>" method="post" class="form-signin"
+        style="margin:0 auto;max-width:480px;">
+
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" value="1" id="isDeleted" name="isDeleted">
+          <label class="form-check-label" for="isDeleted">회원탈퇴</label>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <button class="btn btn-md btn-primary btn-block" type="button" onclick="window.history.back(-1)">취소</button>
+          </div>
+          <div class="col-6">
+            <button class="btn btn-md btn-primary btn-block" type="submit">저장</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </main><!-- /.container -->
+
+  <footer class="footer">
+    <%- include(`${ejsRoot}/inc/copyright`); %>
+  </footer>
+
+  <!-- SCRIPT -->
+  <%- include(`${ejsRoot}/inc/scripts`); %>
+</body>
+
+</html>

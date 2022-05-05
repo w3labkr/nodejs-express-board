@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NodeJS</title>
+
+  <!-- CSS -->
+  <%- include(`${ejsRoot}/inc/stylesheets`); %>
+  <link rel="stylesheet" href="<%= baseUrl %>/assets/css/admin.css">
+  <link rel="stylesheet" href="<%= baseUrl %>/assets/css/dashboard.css">
+</head>
+
+<body>
+  <% current = 'dashboard' %>
+
+  <header>
+    <%- include(`${ejsRoot}/inc/admin-navigation`); %>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <%- include(`${ejsRoot}/inc/admin-sidebar`); %>
+      </nav>
+
+      <main role="main" class="main col-md-9 ml-sm-auto col-lg-10 px-md-4" style="padding-top:80px;">
+
+        <div
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">대시보드</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+              <span data-feather="calendar"></span>
+              이번주
+            </button>
+          </div>
+        </div>
+
+        <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+
+        <h2 class="mt-5 mb-3">최신 글</h2>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">아이디</th>
+                <th scope="col">이름</th>
+                <th scope="col">제목</th>
+                <th scope="col">수정</th>
+                <th scope="col">조회</th>
+                <th scope="col">답글</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var i = 0; i < rows.length; i++) { %>
+
+              <% if (rows[i].uid === 'admin') { %>
+              <tr class="alert alert-dark">
+                <% } else { %>
+              <tr>
+                <% } %>
+
+                <th scope="row"><%- rows[i].bid %></th>
+                <td><%- rows[i].uid %></td>
+                <td><%- rows[i].uname %></td>
+                <td><%- rows[i].title %></td>
+                <td><%- rows[i].modTime %></td>
+                <td><%- rows[i].viewCount %></td>
+                <td><%- rows[i].replyCount %></td>
+              </tr>
+
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+
+      </main><!-- /.container -->
+
+    </div>
+  </div>
+
+  <footer class="footer">
+    <%- include(`${ejsRoot}/inc/copyright`); %>
+  </footer>
+
+  <!-- SCRIPT -->
+  <%- include(`${ejsRoot}/inc/scripts`); %>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="<%= baseUrl %>/vendor/Chart.js-2.7.3/Chart.min.js"></script>
+  <script src="<%= baseUrl %>/assets/js/dashboard.js"></script>
+</body>
+
+</html>

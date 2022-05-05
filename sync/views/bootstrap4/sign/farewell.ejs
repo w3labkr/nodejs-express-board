@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farewell | Nodejs</title>
+
+  <!-- CSS -->
+  <%- include(`${ejsRoot}/inc/stylesheets`); %>
+</head>
+
+<body>
+
+  <header>
+    <%- include(`${ejsRoot}/inc/navigation`); %>
+  </header>
+
+  <main role="main">
+
+    <%- include(`${ejsRoot}/inc/jumbotron`); %>
+
+    <div class="container">
+
+      <h1>회원탈퇴가 성공적으로 진행 되었습니다.</h1>
+      <p><i id="countdown" class="display-1">3</i>초후 로그인 페이지로 이동합니다.</p>
+
+    </div>
+
+  </main><!-- /.container -->
+
+  <footer class="footer">
+    <%- include(`${ejsRoot}/inc/copyright`); %>
+  </footer>
+
+  <!-- SCRIPT -->
+  <%- include(`${ejsRoot}/inc/scripts`); %>
+  <script>
+    // countdown
+    let start = 3;
+    let finish = setInterval(() => {
+      if (start < 1) {
+        clearInterval(finish);
+      }
+      if (start > 0) {
+        document.getElementById("countdown").innerText = start - 1;
+        start -= 1;
+      }
+    }, 1000);
+    // redirect
+    setTimeout(() => { window.location.href = "/board/list/1" }, 3000);
+  </script>
+</body>
+
+</html>

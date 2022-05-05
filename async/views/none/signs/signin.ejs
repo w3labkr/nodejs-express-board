@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <form action="<%= baseUrl %>/signin"
+        method="post">
+
+    <h1>Sign In</h1>
+
+    <div class="row">
+      <div class="col">
+
+        <div>
+          <label for="user_login">Username or Email</label>
+          <br>
+          <input type="text"
+                 id="user_login"
+                 name="user_login"
+                 placeholder="username"
+                 required
+                 autofocus>
+        </div>
+
+        <div>
+          <label for="
+                 user_pass">Password</label>
+          <br>
+          <input type="password"
+                 id="user_pass"
+                 name="user_pass"
+                 placeholder="password"
+                 required>
+        </div>
+
+        <% if (isError === true) { %>
+        <div>
+          <%= errmsg %>
+        </div>
+        <% } %>
+
+        <div>
+          <button type="button"
+                  onclick="window.history.back(-1)">Back</button>
+          <button type="submit"
+                  data-error-message="">Sign in</button>
+        </div>
+
+        <div>
+          Not a member? <a href="/signup">Sign up</a> now
+          <br>
+          <a href="/forgot">Forgot your username or password?</a>
+        </div>
+
+      </div><!-- col -->
+    </div><!-- row -->
+
+  </form>
+
+  <!-- SCRIPTS -->
+  <script src="/vendor/underscore/1.12.0/underscore-min.js"></script>
+  <script type="module"
+          src="/assets/js/signin.js"></script>
+
+</body>
+
+</html>

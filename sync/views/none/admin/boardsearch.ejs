@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board List</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://localhost:3000/vendor/bootstrap-4.5.3-dist/css/bootstrap.min.css">
+
+  <!-- CSS -->
+  <%- include(`${ejsRoot}/inc/stylesheets`); %>
+
+  <% current = 'board' %>
+</head>
+
+<body>
+
+  <header>
+    <%- include(`${ejsRoot}/inc/admin-navigation`); %>
+  </header>
+
+  <main class="main" role="main">
+
+    <%- include(`${ejsRoot}/inc/jumbotron`); %>
+
+    <div class="container">
+
+      <div class="float-right mb-3">
+        <form action="<%= baseUrl %>/admin/boardsearch" method="post" class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="게시판 제목을 입력해 주세요." aria-label="Search"
+            name="title" value="<%= search %>">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">검색</button>
+        </form>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">아이디</th>
+            <th scope="col">이름</th>
+            <th scope="col">제목</th>
+            <th scope="col">수정</th>
+            <th scope="col">조회</th>
+            <th scope="col">답글</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i = 0; i < rows.length; i++){ %>
+          <% if (rows[i].uid === 'admin') { %>
+          <tr class="alert alert-dark"
+            onclick="window.location.href='<%= baseUrl %>/admin/boarddetail/<%- rows[i].bid %>'">
+            <% } else { %>
+          <tr onclick="window.location.href='<%= baseUrl %>/admin/boarddetail/<%- rows[i].bid %>'">
+            <% } %>
+            <th scope="row"><%- rows[i].bid %></th>
+            <td><%- rows[i].uid %></td>
+            <td><%- rows[i].uname %></td>
+            <td><%- rows[i].title %></td>
+            <td><%- rows[i].modTime %></td>
+            <td><%- rows[i].viewCount %></td>
+            <td><%- rows[i].replyCount %></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="javascript:void(0);" tabindex="-1" aria-disabled="true">이전</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+          <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+          <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="javascript:void(0);">다음</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+  </main><!-- /.container -->
+
+  <footer class="footer">
+    <%- include(`${ejsRoot}/inc/copyright`); %>
+  </footer>
+
+  <!-- SCRIPT -->
+  <%- include(`${ejsRoot}/inc/scripts`); %>
+</body>
+
+</html>

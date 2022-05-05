@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <form action="<%= baseUrl %>/signup"
+        method="post"
+        name="form">
+
+    <h1>Sign Up</h1>
+
+    <div class="row">
+
+      <div class="col">
+
+        <div>
+          <label for="user_login">Username</label>
+          <br>
+          <input type="text"
+                 id="user_login"
+                 name="user_login"
+                 placeholder="username"
+                 minlength="3"
+                 data-status="fail"
+                 data-error-message=" At least 3 characters are required."
+                 data-whitespace-message=" It cannot contain spaces."
+                 data-number-message=" It cannot start with a number."
+                 data-minlength-message=" At least 3 characters are required."
+                 data-success-message=""
+                 required
+                 autofocus>
+          <button type="button"
+                  id="check_user_login"
+                  data-status="fail"
+                  data-error-message=" This username cannot be used."
+                  data-whitespace-message=" It cannot contain spaces."
+                  data-number-message=" It cannot start with a number."
+                  data-minlength-message=" At least 3 characters are required."
+                  data-success-message=" You can use this username.">Check</button>
+        </div>
+
+        <div>
+          <label for="user_email">Email address</label>
+          <br>
+          <input type="user_email"
+                 id="user_email"
+                 name="user_email"
+                 placeholder="example@domain.com"
+                 data-status="fail"
+                 data-error-message=" Email format is not valid."
+                 required>
+        </div>
+
+        <div>
+          <label for="user_pass">Password</label>
+          <br>
+          <input type="password"
+                 id="user_pass"
+                 name="user_pass"
+                 placeholder="password"
+                 required>
+        </div>
+
+        <div>
+          <label for="check_user_pass">Confirm password</label>
+          <br>
+          <input type="password"
+                 id="check_user_pass"
+                 placeholder="password"
+                 data-status="fail"
+                 data-error-message=" Passwords do not match."
+                 required>
+        </div>
+
+        <div>
+          <label for="privacy-policy">Do you agree to the <a href="/privacy-policy"
+               target="_blank">privacy policy</a>?</label>
+          <input type="checkbox"
+                 id="privacy-policy"
+                 required>
+        </div>
+
+        <% if (isError === true) { %>
+        <div>
+          <%= errmsg %>
+        </div>
+        <% } %>
+
+        <div>
+          <button type="button"
+                  onclick="window.history.back(-1)">Back</button>
+          <button type="submit">Create Account</button>
+        </div>
+
+        <div>
+          Already a member? <a href="/signin">Sign in</a> now
+        </div>
+
+      </div><!-- col -->
+
+      <div class="col">
+        <!-- ... -->
+      </div><!-- col -->
+
+    </div><!-- row -->
+
+  </form>
+
+  <!-- SCRIPTS -->
+  <script src="/vendor/underscore/1.12.0/underscore-min.js"></script>
+  <script type="module"
+          src="/assets/js/signup.js"></script>
+
+</body>
+
+</html>

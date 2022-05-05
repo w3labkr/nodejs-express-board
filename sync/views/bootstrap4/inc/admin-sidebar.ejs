@@ -1,0 +1,23 @@
+<div class="sidebar-sticky pt-3">
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link <%if (current == 'dashboard') {%>active<%}%>" href="#">
+        <span data-feather="home"></span>
+        대시보드
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link <%if (current == 'board') {%>active<%}%>" href="<%= baseUrl %>/admin/boardlist/1">
+        <span data-feather="file"></span>
+        게시판
+      </a>
+    </li>
+    <li class="nav-item <%if (current == 'users') {%>active<%}%>">
+      <a class="nav-link" href="<%= baseUrl %>/admin/userlist/1">
+      <span data-feather="shopping-cart"></span>
+      사용자
+      </a>
+    </li>
+  </ul>
+
+</div>
